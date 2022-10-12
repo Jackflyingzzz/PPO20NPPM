@@ -90,7 +90,7 @@ def resume_env(plot=False,  # To plot results (Field, controls, lift, drag, rec 
                          # whether to feed as input probe values or difference between average top/bottom pressures
                          'single_output': single_output,  # whether policy network outputs one or two outputs
                          'symmetric': False,
-                         'include_actions': True
+                         'include_actions': False
                          }
 
         optimization_params = {"num_steps_in_pressure_history": 1,
