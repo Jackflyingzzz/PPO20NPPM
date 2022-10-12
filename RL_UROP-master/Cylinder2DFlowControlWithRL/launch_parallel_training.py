@@ -11,6 +11,7 @@ from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv, VecNorm
 from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.logger import Logger, HumanOutputFormat, DEBUG
 from stable_baselines3.sac import SAC
+from sb3_contrib import RecurrentPPO
 import torch
 from gym.wrappers.time_limit import TimeLimit
 from stable_baselines3.common.callbacks import CheckpointCallback
@@ -64,7 +65,8 @@ if __name__ == '__main__':
 
     env = SubprocVecEnv([resume_env(nb_actuations,i) for i in range(number_servers)], start_method='spawn')
     #env = VecFrameStack(env, n_stack=1)
-    model = TQC('MlpPolicy', VecNormalize(env, gamma=0.99), tensorboard_log=savedir, **config)
+    model = RecurrentPPO("MlpLstmPolicy", VecNormalize(env, gamma=config["gamma"]), n_epochs=20, tensorboard_log=savedir)
+    #model = TQC('MlpPolicy', VecNormalize(env, gamma=0.99), tensorboard_log=savedir, **config)
     model.learn(15000000, callback=[checkpoint_callback], log_interval=1)
 
    
