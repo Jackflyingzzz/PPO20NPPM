@@ -77,7 +77,7 @@ def resume_env(plot=False,  # To plot results (Field, controls, lift, drag, rec 
         solver_params = {'dt': dt}
 
         # Define probes positions
-        probe_distribution = {'distribution_type': 'inflow64',
+        probe_distribution = {'distribution_type': 'base',
                               'probes_at_jets': False,
                               # Whether to use probes at jets or not (for distributions other than 'rabault151'
                               'n_base': 64}  # Number of probes at cylinder base if 'base' distribution is used
@@ -90,7 +90,7 @@ def resume_env(plot=False,  # To plot results (Field, controls, lift, drag, rec 
                          # whether to feed as input probe values or difference between average top/bottom pressures
                          'single_output': single_output,  # whether policy network outputs one or two outputs
                          'symmetric': False,
-                         'include_actions': False
+                         'include_actions': True
                          }
 
         optimization_params = {"num_steps_in_pressure_history": 1,
